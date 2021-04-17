@@ -15,7 +15,7 @@ const runJobs = async () => {
         printLog(rawLog);
     });
 
-    await timeout(3300);
+    await timeout(3300000);
     if (shell.exec(`killall meocoder`, { silent: true }).code === 0) {
         console.log('-- ket thuc jobs');
     }
