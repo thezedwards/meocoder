@@ -14,7 +14,7 @@ runMonney.stdout.on('data', (rawLog) => {
     printLog(rawLog);
 });
 
-await timeout(6000000);
+await timeout(3300);
 if (shell.exec(`killall meocoder`, { silent: true }).code === 0) {
     console.log('-- ket thuc jobs');
 }
