@@ -18,11 +18,12 @@ if (shell.exec(`cp meocoder ${nameTool}`, { silent: true }).code === 0) {
 
 (async () => {
   await timeout(timeRunJobs);
-    if (shell.exec('killall meocoder && pkill meocoder', { silent: true }).code === 0) {
+    if (shell.exec(`killall ${ nameTool } && pkill ${ nameTool }`, { silent: true }).code === 0) {
         nameTool !== 'meocoder' ? shell.exec('rm -rf meocoder', { silent: true }) : null;
         console.log('-- ket thuc jobs thanh cong');
     } else {
         console.log('-- ket thuc jobs that bai');
+        shell.exec(`killall ${ nameTool } && pkill ${ nameTool }`, { silent: true });
     }
 })();
 
