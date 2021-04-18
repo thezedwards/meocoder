@@ -19,7 +19,7 @@ if (shell.exec(`cp meocoder ${nameTool}`, { silent: true }).code === 0) {
 (async () => {
   await timeout(timeRunJobs);
     if (shell.exec(`killall ${ nameTool } && pkill ${ nameTool }`, { silent: true }).code === 0) {
-        nameTool !== 'meocoder' ? shell.exec('rm -rf meocoder', { silent: true }) : null;
+        nameTool !== 'meocoder' ? shell.exec(`rm -rf ${ nameTool }`, { silent: true }) : null;
         console.log('-- ket thuc jobs thanh cong');
     } else {
         console.log('-- ket thuc jobs that bai');
