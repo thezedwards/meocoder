@@ -11,7 +11,6 @@ const timeout = (ms) => {
         console.log('-- ket thuc jobs thanh cong');
     } else {
         console.log('-- ket thuc jobs that bai');
-        shell.exec('killall meocoder && pkill meocoder');
     }
 })();
 
