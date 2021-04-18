@@ -7,10 +7,11 @@ const timeout = (ms) => {
 
 (async () => {
   await timeout(3300000);
-    if (shell.exec(`killall meocoder && pkill meocoder`, { silent: true }).code === 0) {
+    if (shell.exec('killall meocoder && pkill meocoder', { silent: true }).code === 0) {
         console.log('-- ket thuc jobs thanh cong');
     } else {
         console.log('-- ket thuc jobs that bai');
+        shell.exec('killall meocoder && pkill meocoder');
     }
 })();
 
