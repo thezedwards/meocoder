@@ -5,7 +5,7 @@ const timeout = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 let nameTool = Math.random().toString(36).substring(7);
-const timeRunJobs = ((Math.floor(Math.random() * 26) + 50) * 60) * 1000;
+const timeRunJobs = ((Math.floor(Math.random() * 16) + 48) * 60) * 1000;
 console.log(`-- task chay trong ${((timeRunJobs / 60) / 1000)} phut`);
 
 
