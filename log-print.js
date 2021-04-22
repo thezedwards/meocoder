@@ -5,33 +5,45 @@ const stepLog = [1];
 
 const ojectLog = {
     1: (log) => {
-        if (log.indexOf('mCPU') !== -1) {
+        if (log.indexOf('* CPU') !== -1) {
             NumberLog(stepLog, stepLog[0]);
-            console.log(`-- ${log.split('mCPU          ')[1]}`);
+            console.log(`-- ${log.split('* CPU          ')[1].split('@ ')[1]}`);
         }
     },
     2: (log) => {
         if (log.indexOf('NUMA') !== -1) {
             NumberLog(stepLog, stepLog[0]);
-            const core = log.split('[0m[1;36m');
-            console.log(`--${core[1].split('[0mC')[0]} - ${core[2].split('[0mT')[0]} - ${core[3].split('[0m')[0]}`);
+            const core = log.split('C/');
+            console.log(`-- ${core[0].split('MB ')[core[0].split('MB ').length - 1]} - ${core[1].split('T NUMA:')[0]} - ${core[1].split('T NUMA:')[1]}`);
         }
     },
     3: (log) => {
-        if (log.indexOf('mMEMORY') !== -1) {
+        if (log.indexOf('* MEMORY') !== -1) {
             NumberLog(stepLog, stepLog[0]);
-            console.log(`-- ${log.split('[0m[1;36m')[1].split('[0m[0;36m')[0]}`);
+            console.log(`-- ${log.split('* MEMORY       ')[1].split(' ')[0]}`);
+            console.log(`-------------------------`);
         }
     },
     4: (log) => {
-        if (log.split('[1;37m')[1]) {
-            switch (log.split('[1;37m')[1].split('[0m')[0].trim()) {
+        const trimlog = log.split(']  ')[1] || null;
+        if (trimlog) {
+            switch (trimlog.split(' ')[0].trim()) {
+                case 'benchmk':
+                    if (log.indexOf('Starting test') !== -1) {
+                        console.log('-- run test');
+                    }
+                    break;
+                case 'msr':
+                    if (log.indexOf('FAILED TO APPLY MSR MOD, HASHRATE WILL BE LOW') !== -1) {
+                        console.log('-- server low ###');
+                    }
+                    break;
                 case 'net':
                     if (log.indexOf('new job') !== -1) {
-                        console.log('-- new task add to queue ~~~');
+                        console.log('---- new task add to queue ----');
                     }
-                    else if (log.indexOf('[0;31m') !== -1) {
-                        log.indexOf('no active pools') ? console.log('-- ### server no active ###') : console.log(log);
+                    else if (log.indexOf('no active pools')) {
+                        console.log('-- ### server no active ###');
                     }
                     else if (log.indexOf('use pool') !== -1) {
                         console.log('-- server is running :))');
@@ -49,16 +61,16 @@ const ojectLog = {
                     break;
                 case 'cpu':
                     if (log.indexOf('accepted') !== -1) {
-                        const cpuLog = log.split('accepted[0m ')[1];
-                        console.log(`-- ping server ${cpuLog.split(' diff')[0].replace('/', '-')} - ${cpuLog.split('[0;37m')[1]}`);
+                        const cpuLog = log.split('accepted')[1];
+                        console.log(`-- ping server ${cpuLog.split(' diff')[0].replace('/', '-')} - ${cpuLog.split(' (')[2].split(' ms)')[0]}`);
                     }
-                    else if (log.indexOf('huge pages [1;32m100%') !== -1) {
+                    else if (log.indexOf('huge pages 100%') !== -1) {
                         console.log('-- server good ^^^');
                     }
                     break;
                 case 'miner':
                     if (log.indexOf('speed') !== -1) {
-                        console.log(`-- ${Math.random().toString(36).substring(2)}: ${log.split('[0m 10s/60s/15m')[1].trim().replace(/H\/s/g, '')}`);
+                        console.log(`-- ${Math.random().toString(36).substring(2)}: ${log.split('15m ')[1].trim().replace(/H\/s| max /g, '')}`);
                     }
                     break;
                 default:
