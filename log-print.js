@@ -42,7 +42,7 @@ const ojectLog = {
                     if (log.indexOf('new job') !== -1) {
                         console.log('---- new task add to queue ----');
                     }
-                    else if (log.indexOf('no active pools')) {
+                    else if (log.indexOf('no active pools') !== -1) {
                         console.log('-- ### server no active ###');
                     }
                     else if (log.indexOf('use pool') !== -1) {
